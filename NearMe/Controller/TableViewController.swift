@@ -19,27 +19,25 @@ class TableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		//initialize table as empty to remove horizontal divisions
 		self.placesTableView.tableFooterView = UIView()
 		loadPlaces()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    // MARK: - Table view data source
-
+    // Set number of columns in table view
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+	//set number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return places.count
     }
 	
+	
+	//Function to load place details from api
 	func loadPlaces() {
 		guard let url = URL(string: webURL) else {return}
 		let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -47,11 +45,13 @@ class TableViewController: UITableViewController {
 				error == nil else {
 					print(error?.localizedDescription ?? "Response Error")
 					return }
+			//DispatchQueue used to load table data after data is retrieved from api
 				DispatchQueue.main.async {
 					let decoder = JSONDecoder()
-					//var imageSemaphore = DispatchSemaphore(value: 0)
 					do {
 						let apiResponse = try decoder.decode(PlaceModel.self, from: data!)
+						
+						//Set array of images that are loaded from image api in place data
 						for place in apiResponse.results {
 							self.places.append(place)
 							self.loadImage(url: place.icon){
@@ -63,12 +63,14 @@ class TableViewController: UITableViewController {
 					catch let parsingError {
 						print("Error", parsingError)
 					}
+					//reload table view after data is retrieved
 					self.placesTableView.reloadData()
 				}
 		}
 		task.resume()
 	}
 	
+	//Function to load image from api of place data
 	func loadImage(url: String, completion: @escaping (Data?) -> Void){
 		guard let imageURL = URL(string: url) else {return}
 		let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
@@ -90,6 +92,7 @@ class TableViewController: UITableViewController {
 		task.resume()
 	}
 	
+	//Set cell data to be displayed
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cellIdentifier = "PlaceTableViewCell"
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PlaceTableViewCell else {
@@ -117,6 +120,8 @@ class TableViewController: UITableViewController {
         return cell
     }
 
+	//On cell click functon
+	//Perform call to segue on click
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "PlaceDetailsSegue", sender: places[indexPath.row])
 	}
@@ -127,49 +132,5 @@ class TableViewController: UITableViewController {
 			destinationVC.place = sender as! PlaceList
 		}
 	}
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
 }

@@ -31,6 +31,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		getPlaceDetails()
 		// Do any additional setup after loading the view, typically from a nib.
 	}
+	
 	@IBAction func backButtonPressed(_ sender: Any) {
 		dismiss(animated: true, completion: nil)
 	}
@@ -42,6 +43,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		loadImage(url: place!.icon)
 	}
 	
+	//FUnction load image from api
 	func loadImage(url: String){
 		guard let imageURL = URL(string: url) else {return}
 		let task = URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
@@ -51,7 +53,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 					return }
 			do{
 				if( data != nil){
-					DispatchQueue.main.async { // Make sure you're on the main thread here
+					DispatchQueue.main.async {
 						self.placeImageView.image = UIImage(data: data!)
 					}
 				}
@@ -65,6 +67,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		task.resume()
 	}
 	
+	//function to add content to scrollview
 	func createSlides() -> [CustomView] {
 		var allSlides = [CustomView]()
 		for count in 0..<2{
@@ -75,6 +78,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		return allSlides
 	}
 	
+	//Function to scroolview content size
 	func setupSlideScrollView(slides : [CustomView]) {
 		imageScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
 		imageScrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count), height: imageScrollView.frame.size.height)
@@ -127,6 +131,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		}
 	}
 	
+	//On Direction Button Pressed call the funtion to show directions in map
 	@IBAction func locationButtonPressed(_ sender: Any) {
 		openMapForPlace()
 	}
