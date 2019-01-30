@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController,UIScrollViewDelegate {
 	
@@ -124,6 +125,37 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 			
 			}
 		}
+	}
+	
+	@IBAction func locationButtonPressed(_ sender: Any) {
+		openMapForPlace()
+	}
+	
+	/*
+		Function to access maps to show directions to place
+	*/
+	func openMapForPlace() {
+		
+		let latitude: CLLocationDegrees = (place?.geometry.location.lat)!
+		let longitude: CLLocationDegrees = (place?.geometry.location.lng)!
+		let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+		let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+		let mapItem = MKMapItem(placemark: placemark)
+		mapItem.name = place?.name
+		
+		/*
+		//Launch maps with location centered
+		let regionDistance:CLLocationDistance = 10000
+		let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+		let options = [
+			MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+			MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+		]
+		mapItem.openInMaps(launchOptions: options)
+		*/
+		
+		//launch maps with directions
+		mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
 	}
 
 }

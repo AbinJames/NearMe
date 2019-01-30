@@ -54,7 +54,7 @@
                                             <constraint firstAttribute="height" constant="45" id="gYQ-ao-fCc"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9O-oQ-E6M">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9O-oQ-E6M">
                                         <rect key="frame" x="61" y="8" width="304" height="36"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                         <nil key="textColor"/>
@@ -67,6 +67,16 @@
                                             <constraint firstAttribute="height" constant="215" id="yRa-Ky-Xtc"/>
                                         </constraints>
                                     </scrollView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBx-Sh-WzT">
+                                        <rect key="frame" x="285" y="438" width="82" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="82" id="hk6-mL-BAt"/>
+                                        </constraints>
+                                        <state key="normal" title="Directions"/>
+                                        <connections>
+                                            <action selector="locationButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rGs-79-5Gy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -77,10 +87,12 @@
                                     <constraint firstAttribute="trailing" secondItem="xxx-8e-zqa" secondAttribute="trailing" constant="168" id="56Z-M6-pyi"/>
                                     <constraint firstItem="xxx-8e-zqa" firstAttribute="top" secondItem="cjT-xM-WFv" secondAttribute="bottom" constant="8" id="8wt-3g-Dlp"/>
                                     <constraint firstItem="cjT-xM-WFv" firstAttribute="top" secondItem="Q9O-oQ-E6M" secondAttribute="bottom" constant="17" id="Atm-MD-tfc"/>
+                                    <constraint firstAttribute="trailing" secondItem="OBx-Sh-WzT" secondAttribute="trailing" constant="8" id="BL9-FH-DGt"/>
                                     <constraint firstItem="Cfw-us-Wfw" firstAttribute="leading" secondItem="2S8-Ey-lqF" secondAttribute="leading" constant="8" id="C5d-bh-Y2V"/>
                                     <constraint firstAttribute="trailing" secondItem="Q9O-oQ-E6M" secondAttribute="trailing" constant="10" id="GZt-vn-YuO"/>
                                     <constraint firstItem="Q9O-oQ-E6M" firstAttribute="top" secondItem="2S8-Ey-lqF" secondAttribute="top" constant="8" id="Nou-r5-FFR"/>
                                     <constraint firstAttribute="trailing" secondItem="xxx-8e-zqa" secondAttribute="trailing" constant="168" id="NzA-OK-qK4"/>
+                                    <constraint firstAttribute="bottom" secondItem="OBx-Sh-WzT" secondAttribute="bottom" constant="8" id="R3O-e9-Euu"/>
                                     <constraint firstItem="xxx-8e-zqa" firstAttribute="leading" secondItem="2S8-Ey-lqF" secondAttribute="leading" constant="168" id="TSi-cj-Jew"/>
                                     <constraint firstItem="Cfw-us-Wfw" firstAttribute="top" secondItem="2S8-Ey-lqF" secondAttribute="top" constant="8" id="U65-gV-QZv"/>
                                     <constraint firstItem="Q9O-oQ-E6M" firstAttribute="leading" secondItem="Cfw-us-Wfw" secondAttribute="trailing" constant="8" id="WUU-ai-yBT"/>
@@ -92,7 +104,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YmU-0d-p4m" userLabel="Bottom View">
                                 <rect key="frame" x="0.0" y="571.5" width="375" height="95.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPi-Au-oqy">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Vicinity" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPi-Au-oqy">
                                         <rect key="frame" x="10" y="8" width="355" height="24"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
