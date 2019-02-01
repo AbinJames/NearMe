@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8403060F2201B8F2003A881B /* Favourites.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8403060D2201B8F2003A881B /* Favourites.xcdatamodeld */; };
 		84A479CD21FAE1DC009AF904 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A479CC21FAE1DC009AF904 /* AppDelegate.swift */; };
 		84A479CF21FAE1DC009AF904 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A479CE21FAE1DC009AF904 /* ViewController.swift */; };
 		84A479D221FAE1DC009AF904 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A479D021FAE1DC009AF904 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8403060E2201B8F2003A881B /* Favourites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favourites.xcdatamodel; sourceTree = "<group>"; };
 		84A479C921FAE1DC009AF904 /* NearMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A479CC21FAE1DC009AF904 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A479CE21FAE1DC009AF904 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				84A479E521FAF313009AF904 /* PlaceModel.swift */,
+				8403060D2201B8F2003A881B /* Favourites.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				84A479CF21FAE1DC009AF904 /* ViewController.swift in Sources */,
 				84A479E121FAE22C009AF904 /* TableViewController.swift in Sources */,
 				84A479E621FAF313009AF904 /* PlaceModel.swift in Sources */,
+				8403060F2201B8F2003A881B /* Favourites.xcdatamodeld in Sources */,
 				84F445D1220060640068389D /* CustomView.swift in Sources */,
 				84A479CD21FAE1DC009AF904 /* AppDelegate.swift in Sources */,
 				84A479E321FAEC11009AF904 /* PlaceTableViewCell.swift in Sources */,
@@ -378,6 +382,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8403060D2201B8F2003A881B /* Favourites.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8403060E2201B8F2003A881B /* Favourites.xcdatamodel */,
+			);
+			currentVersion = 8403060E2201B8F2003A881B /* Favourites.xcdatamodel */;
+			path = Favourites.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84A479C121FAE1DC009AF904 /* Project object */;
 }

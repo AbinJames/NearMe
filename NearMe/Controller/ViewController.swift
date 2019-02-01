@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class ViewController: UIViewController,UIScrollViewDelegate {
 	
@@ -18,6 +19,12 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 	@IBOutlet weak var imageScrollView: UIScrollView!
 	var slides:[CustomView] = [];
 	@IBOutlet weak var pageControl: UIPageControl!
+	@IBOutlet weak var favouritesButton: UIButton!
+	let favouritesSelectedImage = UIImage(named: "favourite_selected")
+	let favouritesUnselectedImage = UIImage(named: "favourite_unselected")
+	var favouritePlaces: [NSManagedObject] = []
+	var favourite: Bool = false;
+	var selectedfavouritePlace: NSManagedObject?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -30,6 +37,32 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		view.bringSubviewToFront(pageControl)
 		getPlaceDetails()
 		// Do any additional setup after loading the view, typically from a nib.
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		//1
+		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+		
+		let managedContext = appDelegate.persistentContainer.viewContext
+		
+		//2
+		let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavouritePlaces")
+		
+		do {
+			favouritePlaces = try managedContext.fetch(fetchRequest)
+			for favoritePlace in favouritePlaces {
+				if favoritePlace.value(forKey: "id") as? String == (place?.id)! {
+					favourite = true
+					favouritesButton.setImage(favouritesSelectedImage, for: .normal)
+					self.selectedfavouritePlace = favoritePlace
+				}
+			}
+			print("\(favouritePlaces.count)")
+		} catch let error as NSError {
+			print("Could not fetch. \(error), \(error.userInfo)")
+		}
 	}
 	
 	@IBAction func backButtonPressed(_ sender: Any) {
@@ -162,6 +195,41 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 		//launch maps with directions
 		mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
 	}
-
+	
+	@IBAction func favouritesButtonPressed(_ sender: UIButton) {
+		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+		
+		// 1
+		let managedContext = appDelegate.persistentContainer.viewContext
+		
+		// 2
+		let entity = NSEntityDescription.entity(forEntityName: "FavouritePlaces", in: managedContext)!
+		
+		if !favourite {
+			favouritesButton.setImage(favouritesSelectedImage, for: .normal)
+			
+			let favouritePlace = NSManagedObject(entity: entity, insertInto: managedContext)
+			// 3
+			favouritePlace.setValue(place?.id, forKeyPath: "id")
+			// 4
+			do {
+				try managedContext.save()
+				favouritePlaces.append(favouritePlace)
+			} catch let error as NSError {
+				print("Could not save. \(error), \(error.userInfo)")
+			}
+		}
+		else {
+			favouritesButton.setImage(favouritesUnselectedImage, for: .normal)
+			managedContext.delete(selectedfavouritePlace!)
+			do {
+				try managedContext.save()
+				//favouritePlaces.de
+			} catch let error as NSError {
+				print("Could not save. \(error), \(error.userInfo)")
+			}
+		}
+	}
+	
 }
 

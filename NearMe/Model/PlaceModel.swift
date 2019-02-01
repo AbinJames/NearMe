@@ -9,6 +9,7 @@
 import Foundation
 
 struct PlaceList : Codable {
+	var id: String
 	var name: String
 	var price_level: Int?
 	var rating: Double
